@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { IDept } from '../../types/api';
 import { formatDateToChinese } from '../../utils';
 import CreateDept from './CreateDept';
-export default function Depth() {
+export default function Dept() {
     const deptRef = useRef<{
         openModal: (type: string, data?: IDept | { parentId: string }) => void;
     }>(null);
@@ -14,10 +14,10 @@ export default function Depth() {
     const [loading, setLoading] = useState(false); // // 用来控制加载状态
     const [form] = Form.useForm();
     useEffect(() => {
-        getDepthData();
+        getDeptData();
     }, []);
     // 获取部门列表
-    const getDepthData = async () => {
+    const getDeptData = async () => {
         setLoading(true);
         const data = await api.getDeptList(form.getFieldsValue());
         setData(data);
@@ -109,11 +109,11 @@ export default function Depth() {
     };
     const handleDelOk = async (id: string) => {
         await api.deleteDept({ _id: id });
-        getDepthData();
+        getDeptData();
     };
     const handleReset = () => {
         form.resetFields();
-        getDepthData();
+        getDeptData();
     };
     const handleCreate = () => {
         console.log('新增');
@@ -126,7 +126,7 @@ export default function Depth() {
                     <Input placeholder="请输入部门名称" />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" className="mr10" onClick={getDepthData}>
+                    <Button type="primary" className="mr10" onClick={getDeptData}>
                         查询
                     </Button>
                     <Button type="primary" htmlType="submit" onClick={handleReset}>
@@ -143,7 +143,7 @@ export default function Depth() {
                 </div>
                 <Table rowKey="_id" columns={columns} dataSource={data} loading={loading} />
             </div>
-            <CreateDept mref={deptRef} update={getDepthData} />
+            <CreateDept mref={deptRef} update={getDeptData} />
         </div>
     );
 }
