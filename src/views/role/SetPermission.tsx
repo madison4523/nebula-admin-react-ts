@@ -1,14 +1,14 @@
 import { Form, Modal, Tree, message } from 'antd';
-import { useState, RefObject, useImperativeHandle, useEffect } from 'react';
+import { useState, useImperativeHandle, useEffect, forwardRef } from 'react';
 import type { TreeProps, TreeDataNode } from 'antd';
 import { IMenu, IPermission, IRole } from '../../types/api';
 import api from '../../api';
 import roleApi from '../../api/roleApi';
 interface IProps {
-    mref: RefObject<{ openModal: (type: string, data?: IRole) => void }>;
     update: () => void;
 }
-export default function CreateRole(props: IProps) {
+export type SetPermissionHandle = { openModal: (type: string, data?: IRole) => void };
+const SetPermission = forwardRef<SetPermissionHandle, IProps>((props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [menuList, setMenuList] = useState<IMenu[]>([]);
     const [checkedKeys, setCheckKeys] = useState<string[]>([]);
@@ -44,7 +44,7 @@ export default function CreateRole(props: IProps) {
             form.setFieldsValue(data);
         }
     };
-    useImperativeHandle(props.mref, () => ({ openModal }));
+    useImperativeHandle(ref, () => ({ openModal }));
     // emit
     const onCheck: TreeProps['onCheck'] = (checkedKeys: any, info: any) => {
         setCheckKeys(checkedKeys);
@@ -89,4 +89,6 @@ export default function CreateRole(props: IProps) {
             </Modal>
         </>
     );
-}
+});
+
+export default SetPermission;

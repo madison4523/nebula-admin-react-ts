@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { Form, Modal, Input, Select, TreeSelect, message } from 'antd';
-import { useState, RefObject, useImperativeHandle } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import { IDept, IUser } from '../../types/api';
 import api from '../../api';
 interface IProps {
-    mref: RefObject<{ openModal: (type: string, data?: IDept | { parentId: string }) => void }>;
     update: () => void;
 }
-export default function CreateDept(props: IProps) {
+export type CreateDeptHandle = { openModal: (type: string, data?: IDept | { parentId: string }) => void };
+const CreateDept = forwardRef<CreateDeptHandle, IProps>((props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deptList, setDeptList] = useState<IDept[]>();
     const [userList, setUserList] = useState<IUser[]>();
@@ -17,7 +17,7 @@ export default function CreateDept(props: IProps) {
         getAllUserList();
     }, []);
     // 获取部门列表
-    const getDepthData = async () => {
+    const getDeptData = async () => {
         const data = await api.getDeptList();
         setDeptList(data);
     };
@@ -46,12 +46,12 @@ export default function CreateDept(props: IProps) {
     const openModal = (type: string, data?: IDept | { parentId: string }) => {
         setAction(type);
         setIsModalOpen(true);
-        getDepthData();
+        getDeptData();
         if (data) {
             form.setFieldsValue(data);
         }
     };
-    useImperativeHandle(props.mref, () => ({ openModal }));
+    useImperativeHandle(ref, () => ({ openModal }));
     // emit
     return (
         <>
@@ -91,4 +91,6 @@ export default function CreateDept(props: IProps) {
             </Modal>
         </>
     );
-}
+});
+
+export default CreateDept;

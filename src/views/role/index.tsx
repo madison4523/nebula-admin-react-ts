@@ -4,16 +4,12 @@ import { IRole, IRoleSearchParams, ISearchParams } from '../../types/api';
 import { formatDateToChinese } from '../../utils';
 import { useAntdTable } from 'ahooks';
 import api from '../../api/roleApi';
-import CreateRole from './CreateRole';
-import SetPremission from './SetPermission';
+import CreateRole, { CreateRoleHandle } from './CreateRole';
+import SetPremission, { SetPermissionHandle } from './SetPermission';
 export default function Role() {
     const [form] = Form.useForm();
-    const roleRef = useRef<{
-        openModal: (type: string, data?: IRole | { parentId: string }) => void;
-    }>(null);
-    const preRef = useRef<{
-        openModal: (type: string, data?: IRole) => void;
-    }>(null);
+    const roleRef = useRef<CreateRoleHandle>(null);
+    const preRef = useRef<SetPermissionHandle>(null);
     const columns: TableColumnsType<IRole> = [
         { title: '角色名称', dataIndex: 'roleName', key: 'roleName' },
         { title: '备注', dataIndex: 'remark', key: 'remark' },
@@ -132,9 +128,9 @@ export default function Role() {
                 <Table bordered rowKey="_id" columns={columns} {...tableProps} />
             </div>
             {/* 创建角色组件 */}
-            <CreateRole mref={roleRef} update={search.submit} />
+            <CreateRole ref={roleRef} update={search.submit} />
             {/* 设置权限组件 */}
-            <SetPremission mref={preRef} update={search.submit} />
+            <SetPremission ref={preRef} update={search.submit} />
         </div>
     );
 }

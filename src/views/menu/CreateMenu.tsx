@@ -1,13 +1,13 @@
 import { Form, Modal, Input, Select, TreeSelect, message, Radio, InputNumber } from 'antd';
-import { useState, RefObject, useImperativeHandle } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { IMenu } from '../../types/api';
 import api from '../../api';
 interface IProps {
-    mref: RefObject<{ openModal: (type: string, data?: IMenu | { parentId: string }) => void }>;
     update: () => void;
 }
-export default function CreateDept(props: IProps) {
+export type CreateMenuHandle = { openModal: (type: string, data?: IMenu | { parentId: string }) => void };
+const CreateMenu = forwardRef<CreateMenuHandle, IProps>((props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [menuList, setMenuList] = useState<IMenu[]>();
     const [action, setAction] = useState<string>('create');
@@ -43,7 +43,7 @@ export default function CreateDept(props: IProps) {
             form.setFieldsValue(data);
         }
     };
-    useImperativeHandle(props.mref, () => ({ openModal }));
+    useImperativeHandle(ref, () => ({ openModal }));
     // emit
     return (
         <>
@@ -120,4 +120,6 @@ export default function CreateDept(props: IProps) {
             </Modal>
         </>
     );
-}
+});
+
+export default CreateMenu;

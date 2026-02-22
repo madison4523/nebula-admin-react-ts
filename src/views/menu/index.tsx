@@ -5,11 +5,9 @@ import api from '../../api';
 import { useEffect } from 'react';
 import { IMenu } from '../../types/api';
 import { formatDateToChinese } from '../../utils';
-import CreateDept from './CreateMenu';
+import CreateMenu, { CreateMenuHandle } from './CreateMenu';
 export default function Menu() {
-    const menuRef = useRef<{
-        openModal: (type: string, data?: IMenu | { parentId: string }) => void;
-    }>(null);
+    const menuRef = useRef<CreateMenuHandle>(null);
     const [data, setData] = useState<IMenu[]>([]);
     const [loading, setLoading] = useState(false); // // 用来控制加载状态
     const [form] = Form.useForm();
@@ -165,7 +163,7 @@ export default function Menu() {
                 </div>
                 <Table bordered rowKey="_id" columns={columns} dataSource={data} loading={loading} pagination={false} />
             </div>
-            <CreateDept mref={menuRef} update={getMenuData} />
+            <CreateMenu ref={menuRef} update={getMenuData} />
         </div>
     );
 }

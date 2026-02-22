@@ -5,11 +5,9 @@ import api from '../../api';
 import { useEffect } from 'react';
 import { IDept } from '../../types/api';
 import { formatDateToChinese } from '../../utils';
-import CreateDept from './CreateDept';
-export default function Dept() {
-    const deptRef = useRef<{
-        openModal: (type: string, data?: IDept | { parentId: string }) => void;
-    }>(null);
+import CreateDept, { CreateDeptHandle } from './CreateDept';
+export default function Depth() {
+    const deptRef = useRef<CreateDeptHandle>(null);
     const [data, setData] = useState<IDept[]>([]);
     const [loading, setLoading] = useState(false); // // 用来控制加载状态
     const [form] = Form.useForm();
@@ -143,7 +141,7 @@ export default function Dept() {
                 </div>
                 <Table rowKey="_id" columns={columns} dataSource={data} loading={loading} />
             </div>
-            <CreateDept mref={deptRef} update={getDeptData} />
+            <CreateDept ref={deptRef} update={getDeptData} />
         </div>
     );
 }

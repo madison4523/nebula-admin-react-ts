@@ -1,12 +1,12 @@
 import { Form, Modal, Input, message } from 'antd';
-import { useState, RefObject, useImperativeHandle } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import { IRole } from '../../types/api';
 import api from '../../api/roleApi';
 interface IProps {
-    mref: RefObject<{ openModal: (type: string, data?: IRole | { parentId: string }) => void }>;
     update: () => void;
 }
-export default function CreateRole(props: IProps) {
+export type CreateRoleHandle = { openModal: (type: string, data?: IRole | { parentId: string }) => void };
+const CreateRole = forwardRef<CreateRoleHandle, IProps>((props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [action, setAction] = useState<string>('create');
     const [form] = Form.useForm();
@@ -35,7 +35,7 @@ export default function CreateRole(props: IProps) {
             form.setFieldsValue(data);
         }
     };
-    useImperativeHandle(props.mref, () => ({ openModal }));
+    useImperativeHandle(ref, () => ({ openModal }));
     // emit
     return (
         <>
@@ -60,4 +60,6 @@ export default function CreateRole(props: IProps) {
             </Modal>
         </>
     );
-}
+});
+
+export default CreateRole;

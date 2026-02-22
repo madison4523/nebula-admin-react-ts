@@ -1,17 +1,16 @@
-import { RefObject } from 'react';
 import { Modal, Form, Input, Select, Upload, TreeSelect, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { useEffect, useImperativeHandle, useState } from 'react';
+import { useEffect, useImperativeHandle, useState, forwardRef } from 'react';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import api from '../../api';
 import roleApi from '../../api/roleApi';
 import { IDept, IRole, IUser } from '../../types/api';
 interface IProps {
-    ref: RefObject<{ openModal: (type: string, data?: IUser) => void }>;
     update: () => void;
 }
-const CreateUser = (props: IProps) => {
+export type CreateUserHandle = { openModal: (type: string, data?: IUser) => void };
+const CreateUser = forwardRef<CreateUserHandle, IProps>((props, ref) => {
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
     const [action, setAction] = useState<string>('create');
@@ -37,7 +36,7 @@ const CreateUser = (props: IProps) => {
     };
 
     // 暴露子组件open方法
-    useImperativeHandle(props.ref, () => {
+    useImperativeHandle(ref, () => {
         return {
             openModal,
         };
@@ -219,6 +218,6 @@ const CreateUser = (props: IProps) => {
             </Form>
         </Modal>
     );
-};
+});
 
 export default CreateUser;

@@ -3,7 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { useRef, useState } from 'react';
 import api from '../../api';
 import { formatDateToChinese } from '../../utils';
-import CreateUser from './CreateUser';
+import CreateUser, { CreateUserHandle } from './CreateUser';
 import { useAntdTable } from 'ahooks';
 import { IUser, IUserSearchParams } from '../../types/api';
 import SearchForm from '../../components/SearchForm';
@@ -12,9 +12,7 @@ import SearchForm from '../../components/SearchForm';
 export default function UserList() {
     const [form] = Form.useForm();
     const [userIds, setUserIds] = useState<number[]>([]);
-    const userRef = useRef<{
-        openModal: (type: string, data?: IUser) => void;
-    }>();
+    const userRef = useRef<CreateUserHandle>(null);
 
     const getTableData = (
         { current, pageSize }: { current: number; pageSize: number },
