@@ -1,4 +1,4 @@
-import { Form, Modal, Input, Select, TreeSelect, message, Radio, InputNumber } from 'antd';
+import { Form, Modal, Input, TreeSelect, message, Radio, InputNumber } from 'antd';
 import { useState, useImperativeHandle, forwardRef } from 'react';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { IMenu } from '../../types/api';

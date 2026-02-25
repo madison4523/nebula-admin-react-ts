@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { MenuUnfoldOutlined, MenuFoldOutlined, DownOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Dropdown, Button } from 'antd';
 import storage from '../../utils/storage';
 import type { MenuProps } from 'antd';

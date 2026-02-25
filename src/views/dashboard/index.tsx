@@ -1,5 +1,5 @@
 import { Descriptions, Card, Button } from 'antd';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../../api';
 import styles from './index.module.less';
 import { IReportData } from '../../types/api';
