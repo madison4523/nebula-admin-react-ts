@@ -21,7 +21,7 @@ export function formatDateToChinese(dateString: string): string {
     );
 }
 
-export function formateState(state: number) {
+export function formatState(state: number) {
     if (state === 1) {
         return '在职';
     } else if (state === 2) {

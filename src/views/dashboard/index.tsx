@@ -4,7 +4,7 @@ import api from '../../api';
 import styles from './index.module.less';
 import { IReportData } from '../../types/api';
 import { useStore } from '../../store';
-import { formateState } from '../../utils';
+import { formatState } from '../../utils';
 import { useCharts } from '../../hooks/useCharts';
 export default function Dashboard() {
     const userInfo = useStore((state) => state.userInfo);
@@ -156,7 +156,7 @@ export default function Dashboard() {
                 <Descriptions title="用户信息">
                     <Descriptions.Item label="用户ID">{userInfo.userId}</Descriptions.Item>
                     <Descriptions.Item label="邮箱">{userInfo.userEmail}</Descriptions.Item>
-                    <Descriptions.Item label="状态">{formateState(userInfo.state)}</Descriptions.Item>
+                    <Descriptions.Item label="状态">{formatState(userInfo.state)}</Descriptions.Item>
                     <Descriptions.Item label="手机号">{userInfo.mobile}</Descriptions.Item>
                     <Descriptions.Item label="岗位">{userInfo.job}</Descriptions.Item>
                     <Descriptions.Item label="部门">{userInfo.deptName}</Descriptions.Item>

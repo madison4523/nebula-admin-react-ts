@@ -96,13 +96,15 @@ src/
 
 ### UI 展示
 
-| Dashboard（视图 1） | Dashboard（视图 2） |
-| --- | --- |
-| ![Dashboard-1](public/imgs/ui1.png) | ![Dashboard-2](public/imgs/ui2.png) |
+![Dashboard-1](public/imgs/ui1.png)
 
-| 用户列表 | 部门管理 |
-| --- | --- |
-| ![用户列表](public/imgs/ui3.png) | ![部门管理](public/imgs/ui4.png) |
+![Dashboard-2](public/imgs/ui2.png)
+
+![用户列表](public/imgs/ui3.png)
+
+![部门管理](public/imgs/ui4.png)
+
+![角色管理](public/imgs/ui5.png)
 
 
 ## License
