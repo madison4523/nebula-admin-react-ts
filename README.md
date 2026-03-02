@@ -102,9 +102,9 @@ src/
 
 ![用户列表](public/imgs/ui3.png)
 
-![部门管理](public/imgs/ui4.png)
+![角色管理](public/imgs/ui4.png)
 
-![角色管理](public/imgs/ui5.png)
+![部门管理](public/imgs/ui5.png)
 
 
 ## License

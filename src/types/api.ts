@@ -177,4 +177,3 @@ export interface IRadarData {
         name: string;
     }
 }
-

@@ -4,6 +4,8 @@ import storage from '../../utils/storage';
 import type { MenuProps } from 'antd';
 import styles from './index.module.less';
 import { useStore } from '../../store';
+import BreadCrump from './BreadCrump';
+
 export default function NavHeader() {
     const { collapsed, updateCollapsed } = useStore();
     const items: MenuProps['items'] = [
@@ -33,12 +35,9 @@ export default function NavHeader() {
                     type="text"
                     icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                     onClick={toggleCollapsed}
-                    style={{
-                        fontSize: '16px',
-                        width: 64,
-                        height: 64,
-                    }}
+                    style={{ fontSize: '16px', width: 64, height: 64 }}
                 />
+                <BreadCrump />
             </div>
             <div className={styles.right}>
                 <Dropdown menu={{ items, onClick }} trigger={['click']}>
